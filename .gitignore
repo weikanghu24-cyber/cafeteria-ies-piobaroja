@@ -1,0 +1,83 @@
+# ============================================
+# Backend (Django)
+# ============================================
+backend/venv/
+backend/.venv/
+backend/env/
+backend/__pycache__/
+backend/**/__pycache__/
+backend/*.pyc
+backend/*.pyo
+backend/*.pyd
+backend/db.sqlite3
+backend/db.sqlite3-journal
+backend/.env
+backend/staticfiles/
+backend/media/
+backend/.pytest_cache/
+backend/.coverage
+backend/htmlcov/
+backend/*.log
+
+# ============================================
+# Frontend Cliente (React + Vite)
+# ============================================
+frontend-cliente/node_modules/
+frontend-cliente/dist/
+frontend-cliente/dist-ssr/
+frontend-cliente/.env
+frontend-cliente/.env.local
+frontend-cliente/.env.*.local
+frontend-cliente/package-lock.json
+frontend-cliente/*.log
+
+# ============================================
+# Admin Frontend (React + Vite)
+# ============================================
+frontend-admin/node_modules/
+frontend-admin/dist/
+frontend-admin/dist-ssr/
+frontend-admin/.env
+frontend-admin/.env.local
+frontend-admin/.env.*.local
+frontend-admin/package-lock.json
+frontend-admin/*.log
+
+# ============================================
+# Editores e IDEs
+# ============================================
+.vscode/
+!.vscode/extensions.json
+.idea/
+*.swp
+*.swo
+*~
+
+# ============================================
+# Sistema operativo
+# ============================================
+.DS_Store
+Thumbs.db
+desktop.ini
+$RECYCLE.BIN/
+
+# ============================================
+# Logs y temporales
+# ============================================
+*.log
+logs/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+.cache/
+.tmp/
+
+# ============================================
+# Variables de entorno (NUNCA subir)
+# ============================================
+.env
+.env.local
+.env.*.local
+*.pem
+*.key

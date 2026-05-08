@@ -1,0 +1,115 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  * {
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  html {
+    font-family: 'Manrope', system-ui, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  body {
+    @apply bg-cream-50 text-coffee-900;
+    background-image:
+      radial-gradient(at 0% 0%, rgba(217, 119, 6, 0.03) 0px, transparent 50%);
+    background-attachment: fixed;
+    min-height: 100vh;
+  }
+
+  h1, h2, h3, h4 {
+    @apply font-display tracking-tight;
+  }
+
+  ::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+  ::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  ::-webkit-scrollbar-thumb {
+    @apply bg-coffee-300 rounded-full;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    @apply bg-coffee-400;
+  }
+}
+
+@layer components {
+  .btn-primary {
+    @apply inline-flex items-center justify-center gap-2 px-4 py-2.5
+           bg-coffee-900 text-cream-100 font-medium rounded-xl text-sm
+           shadow-soft hover:bg-coffee-800 hover:shadow-soft-lg
+           active:scale-[0.98] transition-all duration-200
+           disabled:opacity-50 disabled:cursor-not-allowed;
+  }
+
+  .btn-secondary {
+    @apply inline-flex items-center justify-center gap-2 px-4 py-2.5
+           bg-white text-coffee-900 font-medium rounded-xl text-sm
+           border border-coffee-200 hover:border-coffee-300 hover:bg-cream-100
+           active:scale-[0.98] transition-all duration-200
+           disabled:opacity-50 disabled:cursor-not-allowed;
+  }
+
+  .btn-accent {
+    @apply inline-flex items-center justify-center gap-2 px-4 py-2.5
+           bg-accent text-white font-medium rounded-xl text-sm
+           shadow-soft hover:bg-accent-dark active:scale-[0.98]
+           transition-all duration-200;
+  }
+
+  .btn-danger {
+    @apply inline-flex items-center justify-center gap-2 px-4 py-2.5
+           bg-red-600 text-white font-medium rounded-xl text-sm
+           hover:bg-red-700 active:scale-[0.98] transition-all duration-200;
+  }
+
+  .btn-ghost {
+    @apply inline-flex items-center justify-center gap-2 px-3 py-2
+           text-coffee-700 hover:text-coffee-900 hover:bg-cream-200
+           rounded-xl text-sm transition-all duration-200;
+  }
+
+  .input-field {
+    @apply w-full px-3.5 py-2.5 bg-white border border-coffee-200 rounded-xl
+           text-sm font-body text-coffee-900 placeholder-coffee-400
+           focus:outline-none focus:border-coffee-500 focus:ring-2 focus:ring-coffee-200
+           transition-all duration-150;
+  }
+
+  .card {
+    @apply bg-white rounded-2xl shadow-soft border border-coffee-100;
+  }
+
+  .stat-card {
+    @apply card p-5 hover:shadow-soft-lg transition-shadow;
+  }
+
+  .table-row {
+    @apply hover:bg-cream-100/60 transition-colors;
+  }
+
+  /* Estados de pedido */
+  .badge {
+    @apply inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-[11px] font-semibold uppercase tracking-wide border;
+  }
+  .badge-yellow { @apply bg-yellow-50 text-yellow-700 border-yellow-200; }
+  .badge-blue { @apply bg-blue-50 text-blue-700 border-blue-200; }
+  .badge-orange { @apply bg-accent/10 text-accent-dark border-accent/30; }
+  .badge-green { @apply bg-healthy/15 text-healthy-dark border-healthy/40; }
+  .badge-gray { @apply bg-coffee-100 text-coffee-700 border-coffee-200; }
+  .badge-red { @apply bg-red-50 text-red-700 border-red-200; }
+}
+
+@layer utilities {
+  .pt-safe { padding-top: env(safe-area-inset-top); }
+  .pb-safe { padding-bottom: env(safe-area-inset-bottom); }
+  .no-scrollbar::-webkit-scrollbar { display: none; }
+  .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+}

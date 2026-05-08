@@ -1,0 +1,10 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(.venv/Scripts/python manage.py runserver)",
+      "PowerShell(try { $r = Invoke-WebRequest -Uri \"http://localhost:8000/api/auth/login/\" -Method OPTIONS -Headers @{ \"Origin\" = \"http://localhost:5174\"; \"Access-Control-Request-Method\" = \"POST\" } -TimeoutSec 5 -UseBasicParsing; $r.Headers | Format-List } catch { \"Error: $\\($_.Exception.Message\\)\" })",
+      "Bash(.venv/Scripts/python -c \"import django, os; os.environ.setdefault\\('DJANGO_SETTINGS_MODULE','core.settings'\\); django.setup\\(\\); from django.conf import settings; print\\('CORS:', settings.CORS_ALLOWED_ORIGINS\\); print\\('CSRF:', settings.CSRF_TRUSTED_ORIGINS\\)\")",
+      "PowerShell(Get-NetTCPConnection -LocalPort 8000 -ErrorAction SilentlyContinue | ForEach-Object { $p = Get-Process -Id $_.OwningProcess -ErrorAction SilentlyContinue; \"$\\($_.OwningProcess\\) - $\\($p.Name\\) - $\\($p.CommandLine\\)\" })"
+    ]
+  }
+}
