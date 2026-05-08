@@ -159,7 +159,7 @@ CVC: cualquier 3 cifras. Fecha: cualquiera futura.
 
 ---
 
-## Diseno
+## Diseño
 
 - **Paleta**: cafe tostado (#3d2817) + crema (#f5ede0) + acento naranja (#d97706) + verde saludable (#65a30d)
 - **Tipografias**: Fraunces (titulos, con caracter editorial) + Manrope (texto, geometrica clean)
