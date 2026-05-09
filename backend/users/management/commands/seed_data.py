@@ -71,14 +71,18 @@ class Command(BaseCommand):
             self.stdout.write(f'  - Admin creado: {admin.username}')
 
         # Superusuario para acceder al /admin/ de Django
-        if not User.objects.filter(username='superadmin').exists():
-            su = User.objects.create_superuser(
-                username='superadmin',
-                email='superadmin@cafeteria-ies.local',
-                password='superadmin1234',
-                role=User.Role.ADMIN_CAFETERIA,
-            )
-            self.stdout.write(f'  - Superusuario creado: {su.username}')
+        su, _ = User.objects.get_or_create(
+            username='superadmin',
+            defaults={
+                'email': 'superadmin@cafeteria-ies.local',
+                'role': User.Role.ADMIN_CAFETERIA,
+                'is_staff': True,
+                'is_superuser': True,
+            }
+        )
+        su.set_password('superadmin1234')
+        su.save()
+        self.stdout.write(f'  - Superusuario listo: {su.username}')
 
         # Cliente de prueba
         cliente, created = User.objects.update_or_create(
@@ -90,10 +94,9 @@ class Command(BaseCommand):
                 'role': User.Role.CLIENTE,
             }
         )
-        if created:
-            cliente.set_password('alumno1234')
-            cliente.save()
-            self.stdout.write(f'  - Cliente creado: {cliente.username}')
+        cliente.set_password('alumno1234')
+        cliente.save()
+        self.stdout.write(f'  - Cliente listo: {cliente.username}')
 
     def _crear_categorias(self):
         data = [
