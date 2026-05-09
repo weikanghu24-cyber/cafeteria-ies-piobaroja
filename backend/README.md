@@ -194,22 +194,65 @@ CVC: cualquier 3 cifras. Fecha: cualquiera futura.
 
 ## Deploy en Railway
 
-1. Crea un proyecto nuevo en https://railway.app
-2. New > Deploy from GitHub repo > selecciona tu repo (carpeta backend)
-3. Anade un servicio MySQL: New > Database > MySQL
-4. En el servicio del backend, **Variables**:
-   - `SECRET_KEY` = genera una larga aleatoria
-   - `DEBUG` = `False`
-   - `DATABASE_URL` = referencia al servicio MySQL (Railway la inyecta automaticamente con `${{ MySQL.DATABASE_URL }}`)
-   - `STRIPE_PUBLISHABLE_KEY` = tu pk_test_...
-   - `STRIPE_SECRET_KEY` = tu sk_test_...
-   - `ALLOWED_HOSTS` = `tu-dominio.up.railway.app`
-   - `ALLOWED_ORIGINS` = URL del frontend (cuando lo despliegues)
-   - `FRONTEND_URL` = URL del frontend
-5. Despliega. La primera vez ejecuta tambien:
-   ```
-   railway run python manage.py seed_data
-   ```
+### 1. Crear el proyecto
+
+1. Crea un proyecto nuevo en https://railway.app → **Empty Project**
+2. Anade un servicio MySQL: **+ New > Database > MySQL** y espera a que arranque
+
+### 2. Desplegar el backend
+
+1. **+ New > GitHub Repo** > selecciona tu repo
+2. Click en **Add Root Directory** > escribe `backend`
+3. Railway detecta Python automaticamente gracias al `nixpacks.toml` y el `Procfile`
+
+### 3. Variables de entorno del backend
+
+| Variable | Valor |
+|----------|-------|
+| `SECRET_KEY` | cadena aleatoria larga (ej: `python -c "import secrets; print(secrets.token_urlsafe(50))"`) |
+| `DEBUG` | `False` |
+| `DATABASE_URL` | pega el valor de `MYSQL_PRIVATE_URL` del servicio MySQL |
+| `STRIPE_PUBLISHABLE_KEY` | tu `pk_test_...` |
+| `STRIPE_SECRET_KEY` | tu `sk_test_...` |
+| `ALLOWED_HOSTS` | `*` (luego cambia a tu dominio exacto en produccion real) |
+| `ALLOWED_ORIGINS` | URLs de los frontends separadas por coma |
+| `FRONTEND_URL` | URL del frontend cliente |
+| `GOOGLE_OAUTH_CLIENT_ID` | tu Client ID de Google (opcional) |
+| `GOOGLE_OAUTH_CLIENT_SECRET` | tu Client Secret de Google (opcional) |
+| `PEDIDO_ANTELACION_MIN_MINUTOS` | `15` |
+| `PEDIDO_ANTELACION_MAX_DIAS` | `2` |
+
+> **ALLOWED_HOSTS importante:** usa `*` para que el healthcheck de Railway funcione. En produccion real pon el dominio exacto: `tu-app.up.railway.app`
+
+### 4. Generar URL publica
+
+Settings > Networking > **Generate Domain** > puerto `8080`
+
+### 5. Cargar datos de ejemplo
+
+Una vez desplegado, instala la CLI de Railway y ejecuta desde la carpeta `backend`:
+
+```bash
+npm install -g @railway/cli
+railway login
+railway link   # selecciona proyecto > produccion > backend
+```
+
+Obtén la URL publica de MySQL (Railway > MySQL > Variables > `MYSQL_PUBLIC_URL`) y ejecuta:
+
+```bash
+# Activa el entorno virtual primero
+.venv\Scripts\activate   # Windows
+source .venv/bin/activate  # Mac/Linux
+
+$env:DATABASE_URL = "mysql://root:PASSWORD@HOST_PUBLICO:PUERTO/railway"  # PowerShell
+# o en bash:
+# export DATABASE_URL="mysql://root:PASSWORD@HOST_PUBLICO:PUERTO/railway"
+
+python manage.py seed_data
+```
+
+Esto crea los usuarios de prueba con sus contrasenas correctas.
 
 ## Deploy en Render
 
