@@ -33,7 +33,7 @@ npm install
 
 # 2. Configurar variables de entorno
 cp .env.example .env
-# Edita .env si tu backend NO esta en localhost:8000
+# Edita .env con tu backend y tu Google Client ID (opcional)
 
 # 3. Arrancar
 npm run dev
@@ -178,8 +178,9 @@ CVC: cualquier 3 cifras. Fecha: cualquiera futura.
 2. Conecta Vercel/Netlify al repo
 3. Build command: `npm run build`
 4. Output directory: `dist`
-5. Environment variable:
+5. Variables de entorno:
    - `VITE_API_URL` = URL del backend en produccion
+   - `VITE_GOOGLE_CLIENT_ID` = tu Client ID de Google Cloud (opcional)
 
 ### Railway / Render
 1. Build command: `npm install && npm run build`

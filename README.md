@@ -278,12 +278,17 @@ ALLOWED_ORIGINS=http://localhost:5173,http://localhost:5174
 STRIPE_SECRET_KEY=sk_test_...
 STRIPE_PUBLISHABLE_KEY=pk_test_...
 STRIPE_WEBHOOK_SECRET=whsec_...
+GOOGLE_OAUTH_CLIENT_ID=           # opcional - de Google Cloud Console
+GOOGLE_OAUTH_CLIENT_SECRET=       # opcional - de Google Cloud Console
 ```
+
+> **Google OAuth:** consigue las claves en https://console.cloud.google.com → APIs y servicios → Credenciales → Crear ID de cliente OAuth 2.0. Si las dejas vacías el login con Google simplemente no aparecerá disponible.
 
 ### Frontend Cliente (`frontend-cliente/.env`)
 
 ```env
 VITE_API_URL=http://localhost:8000/api
+VITE_GOOGLE_CLIENT_ID=            # mismo Client ID que en el backend
 ```
 
 ### Admin Frontend (`frontend-admin/.env`)

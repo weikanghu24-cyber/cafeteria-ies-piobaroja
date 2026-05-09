@@ -63,10 +63,14 @@ DATABASE_URL=mysql://USUARIO:PASSWORD@127.0.0.1:3307/cafeteria_ies
 STRIPE_PUBLISHABLE_KEY=pk_test_tu_clave_aqui
 STRIPE_SECRET_KEY=sk_test_tu_clave_aqui
 ALLOWED_ORIGINS=http://localhost:5173,http://127.0.0.1:5173,http://localhost:5174,http://127.0.0.1:5174
+GOOGLE_OAUTH_CLIENT_ID=           # opcional
+GOOGLE_OAUTH_CLIENT_SECRET=       # opcional
 ```
 
 > **Stripe:** consigue tus claves TEST en https://dashboard.stripe.com/test/apikeys
 > No actives la cuenta (no pulses "Activate payments") - asi te ahorras dar NIF/IBAN.
+
+> **Google OAuth (opcional):** consigue las claves en https://console.cloud.google.com → APIs y servicios → Credenciales → Crear ID de cliente OAuth 2.0 (tipo: Aplicacion web). Si las dejas vacias el login con Google no estara disponible pero el resto del proyecto funciona con normalidad.
 
 ### 5. Migraciones y datos de ejemplo
 
