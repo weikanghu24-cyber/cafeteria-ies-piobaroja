@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { useMutation } from '@tanstack/react-query';
+import { useGoogleLogin } from '@react-oauth/google';
 import { motion } from 'framer-motion';
 import { Eye, EyeOff, Loader2 } from 'lucide-react';
 import toast from 'react-hot-toast';
@@ -22,16 +23,26 @@ export function LoginPage() {
   const loginMutation = useMutation({
     mutationFn: (data) => authApi.login(data),
     onSuccess: async ({ data }) => {
-      // dj-rest-auth devuelve {access, refresh, user}
-      login({
-        access: data.access,
-        refresh: data.refresh,
-        user: data.user,
-      });
+      login({ access: data.access, refresh: data.refresh, user: data.user });
       toast.success('¡Bienvenido!');
       navigate(from, { replace: true });
     },
     onError: (err) => toast.error(getErrorMessage(err)),
+  });
+
+  const googleMutation = useMutation({
+    mutationFn: (accessToken) => authApi.googleLogin(accessToken),
+    onSuccess: async ({ data }) => {
+      login({ access: data.access, refresh: data.refresh, user: data.user });
+      toast.success('¡Bienvenido!');
+      navigate(from, { replace: true });
+    },
+    onError: (err) => toast.error(getErrorMessage(err)),
+  });
+
+  const handleGoogleLogin = useGoogleLogin({
+    onSuccess: ({ access_token }) => googleMutation.mutate(access_token),
+    onError: () => toast.error('Error al iniciar sesión con Google'),
   });
 
   const handleSubmit = (e) => {
@@ -160,16 +171,17 @@ export function LoginPage() {
             <div className="flex-1 h-px bg-coffee-200" />
           </div>
 
-          {/* Google login - visible pero deshabilitado */}
           <button
             type="button"
-            disabled
-            title="Disponible próximamente"
-            className="btn-secondary w-full opacity-60 cursor-not-allowed"
+            onClick={() => handleGoogleLogin()}
+            disabled={googleMutation.isPending}
+            className="btn-secondary w-full"
           >
-            <GoogleIcon />
+            {googleMutation.isPending
+              ? <Loader2 className="w-4 h-4 animate-spin" />
+              : <GoogleIcon />
+            }
             Continuar con Google
-            <span className="text-[10px] uppercase ml-1 text-coffee-500">próximamente</span>
           </button>
 
           <p className="text-center text-xs text-coffee-500 mt-8">

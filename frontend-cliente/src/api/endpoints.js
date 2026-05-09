@@ -4,6 +4,7 @@ import { api } from './client';
 export const authApi = {
   register: (data) => api.post('/auth/registration/', data),
   login: (data) => api.post('/auth/login/', data),
+  googleLogin: (accessToken) => api.post('/auth/google/', { access_token: accessToken }),
   logout: () => api.post('/auth/logout/'),
   me: () => api.get('/auth/user/'),
 };

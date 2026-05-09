@@ -2,8 +2,15 @@
 from rest_framework import viewsets, permissions, status
 from rest_framework.decorators import action
 from rest_framework.response import Response
+from dj_rest_auth.registration.views import SocialLoginView
+from allauth.socialaccount.providers.google.views import GoogleOAuth2Adapter
 from .models import Favorite
 from .serializers import FavoriteSerializer
+
+
+class GoogleLoginView(SocialLoginView):
+    """Login con Google OAuth2. Acepta POST con { access_token: '...' }."""
+    adapter_class = GoogleOAuth2Adapter
 
 
 class FavoriteViewSet(viewsets.ModelViewSet):
