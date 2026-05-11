@@ -174,12 +174,6 @@ export function LoginPage() {
             </button>
           </form>
 
-          <div className="mt-8 p-3 rounded-xl bg-cream-100 border border-coffee-100 text-xs text-coffee-600">
-            <p className="font-semibold mb-1 text-coffee-700">Cuenta de demo:</p>
-            <code className="bg-white px-2 py-0.5 rounded font-mono text-coffee-900">
-              admin / cafeteria2024
-            </code>
-          </div>
         </motion.div>
       </main>
     </div>
