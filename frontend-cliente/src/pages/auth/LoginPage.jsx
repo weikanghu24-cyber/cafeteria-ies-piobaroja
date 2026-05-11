@@ -184,13 +184,6 @@ export function LoginPage() {
             Continuar con Google
           </button>
 
-          <p className="text-center text-xs text-coffee-500 mt-8">
-            Cuentas de prueba:
-            <br />
-            <code className="bg-cream-200 px-2 py-0.5 rounded mt-1 inline-block">
-              alumno / alumno1234
-            </code>
-          </p>
         </motion.div>
       </main>
     </div>
